@@ -1,0 +1,8 @@
+{
+  "name": "team-wiki",
+  "version": "0.1.0",
+  "description": "Conversational search over your team's wiki. Refresh to pull the latest maintainer snapshot. Cross-page synthesis answers can be sent back as wiki contributions for the maintainer to review.",
+  "author": {
+    "name": "the maintainer"
+  }
+}
