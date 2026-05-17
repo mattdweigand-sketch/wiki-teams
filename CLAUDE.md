@@ -1,20 +1,14 @@
-# Team Wiki — Map
+# <Organization> Wiki — Map
 
 ## Purpose
 
-The context layer for your organization's AI infrastructure. Downstream agents (sales, product, engineering, customer support) consume this wiki to reason about your company: customers, products, market, people, strategy, decisions. **Agent-readable first, grounded in sources, compounding rather than re-derived.**
+The company-context layer for the AI infrastructure of the organization defined in [`wiki/domain.md`](wiki/domain.md). Downstream agents (sales, product, engineering, customer) consume this wiki to reason about the organization: customers, products, market, people, strategy, decisions. **Agent-readable first, grounded in sources, compounding rather than re-derived.**
 
 This is the **team edition** — the wiki ships as a Cowork plugin so the whole team can search it, refresh to pull the maintainer's latest snapshot, and (opt-in) contribute synthesis-grade answers back for review.
 
-When you fork this template, replace the wording in this section with language specific to your organization.
-
 This file is the **map** — always loaded. It tells you what's where. It does NOT contain workflows. For task-specific procedure, route through [`CONTEXT.md`](CONTEXT.md) → workspace `CONTEXT.md`. For maintainer routines (ingest, lint, publish, review-contributions), see [`MAINTAINING.md`](MAINTAINING.md).
 
----
-
-## First-time setup signal (read at session start)
-
-If [`wiki/overview.md`](wiki/overview.md) still contains the placeholder phrase *"Write a paragraph or two about your company here"*, this is a freshly cloned template that has not been customized. **Offer the user `/setup`** in one line: *"This looks like a fresh template. Want me to run `/setup` to customize it for your org? (3 minutes)"* — then wait for a yes before doing anything. If the wiki has been customized, do not mention `/setup` again.
+**First-session check:** Read [`wiki/domain.md`](wiki/domain.md). If `status: unconfigured`, route to [`SETUP.md`](SETUP.md) before answering other questions.
 
 ---
 
@@ -34,10 +28,12 @@ If any criterion fails, just answer in chat. The wiki compounds because good ans
 ## Folder Map
 
 ```
-your-wiki/
-├── CLAUDE.md              ← Map (this file). Always loaded.
+<wiki-root>/
+├── CLAUDE.md              ← Map (this file). Always loaded by Claude Code.
+├── AGENTS.md              ← Same map, forwards here. Auto-loaded by Codex and others.
 ├── CONTEXT.md             ← Task router. Read second.
 ├── README.md              ← User-facing intro for the plugin and template.
+├── SETUP.md               ← First-session config (when wiki/domain.md is unconfigured).
 ├── MAINTAINING.md         ← Maintainer playbook (ingest, lint, publish, review-contributions).
 │
 ├── raw/                   ← Source documents. Immutable. Never write here. Gitignored.
@@ -46,13 +42,14 @@ your-wiki/
 ├── wiki/                  ← Knowledge layer. Entity pages and indexes.
 │   ├── index.md           ← Navigational entry point for any query
 │   ├── primer.md          ← By-question-type routing into the wiki
-│   ├── overview.md        ← Big-picture summary of the company
-│   ├── glossary.md        ← Canonical terms for your domain
+│   ├── overview.md        ← Big-picture summary of the organization
+│   ├── glossary.md        ← Canonical terms for this domain
+│   ├── domain.md          ← Domain config (org, scope, active entity types, team features)
 │   ├── log.md             ← Append-only history of ingest/query/lint sessions
 │   └── <entity-type>/     ← One folder per entity type (see table below)
 │
 ├── .claude/               ← Wiki machinery (workspace routing + maintainer commands)
-│   ├── commands/          ← Maintainer slash commands (/ingest, /lint, /publish, /review-contributions)
+│   ├── commands/          ← Maintainer slash commands (/setup, /ingest, /lint, /publish, /review-contributions)
 │   ├── scripts/           ← Helper scripts (publish.sh)
 │   └── workspaces/
 │       ├── ingest/        ← Workspace: raw → wiki (pipeline)
@@ -147,7 +144,8 @@ raw/              ingest/             wiki/             research/         analys
 
 At the start of every session:
 1. Read this file (always loaded).
-2. Read [`CONTEXT.md`](CONTEXT.md) to find your task's workspace.
-3. Read that workspace's `CONTEXT.md`.
-4. Skim the last 5 entries in [`wiki/log.md`](wiki/log.md) to see recent activity.
-5. Load only the docs the workspace `CONTEXT.md` says to load. Skip the rest.
+2. Read [`wiki/domain.md`](wiki/domain.md). If `status: unconfigured`, route to [`SETUP.md`](SETUP.md) and run the configuration interview before anything else.
+3. Read [`CONTEXT.md`](CONTEXT.md) to find your task's workspace.
+4. Read that workspace's `CONTEXT.md`.
+5. Skim the last 5 entries in [`wiki/log.md`](wiki/log.md) to see recent activity.
+6. Load only the docs the workspace `CONTEXT.md` says to load. Skip the rest.

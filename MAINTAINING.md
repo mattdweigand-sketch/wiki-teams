@@ -1,4 +1,4 @@
-# Maintaining the Team Wiki
+# Maintaining the <Organization> Wiki
 
 For the maintainer(s) of the wiki. [`README.md`](README.md) is for consumers, [`CLAUDE.md`](CLAUDE.md) is the architecture map — this is the operator's manual for keeping the wiki healthy and distributing it to the team.
 

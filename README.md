@@ -1,22 +1,12 @@
-# Wiki Template — Team Edition
+# <Organization> Wiki — Team Edition
 
-A self-maintaining, LLM-readable knowledge base for your team. Downstream AI agents (sales, product, support, ops) read from this wiki instead of re-deriving context from raw documents every time. Built on the [Karpathy LLM-wiki pattern](https://karpathy.ai/zero-to-one/).
+A clonable, agent-readable wiki template — the team edition. The company context layer for AI agents at the organization defined in [`wiki/domain.md`](wiki/domain.md), distributable to teammates as a [Cowork](https://github.com/anthropics/cowork) plugin with opt-in contribute-back review.
 
-This is the **team edition**: ships as a [Cowork](https://github.com/anthropics/cowork) plugin so the whole team can search the wiki conversationally from inside Claude Code, refresh to pull the maintainer's latest snapshot, and (opt-in) send synthesis-grade answers back as wiki contributions.
+A self-maintaining, LLM-readable knowledge base. Downstream agents (sales, product, customer success) read from it instead of re-deriving context from raw documents. Built on the [Karpathy LLM-wiki pattern](https://karpathy.ai/zero-to-one/).
+
+> **Just cloned this?** See [`SETUP.md`](SETUP.md) — your AI agent will read it on first session and offer to interview you to configure the wiki for your organization. The interview takes ~3 minutes and works in Claude Code, OpenAI Codex, Cursor, and any agent that loads `CLAUDE.md` or `AGENTS.md`.
 
 > Looking for the solo version? See [wiki-solo](https://github.com/mattdweigand-sketch/wiki-solo) — same machinery, no plugin or team-distribution layer.
-
-## Quick start (maintainer)
-
-1. **Use this template** (the "Use this template" button on GitHub) or `git clone` it into your own workspace.
-2. **Open the project in [Claude Code](https://claude.ai/code)** (or another AI coding agent that respects `CLAUDE.md`).
-3. **Run `/setup`.** The agent walks you through first-time customization — names your org, seeds `wiki/overview.md`, decides whether you want the team-plugin features, and confirms you're ready to ingest. Takes ~3 minutes.
-4. **Drop source documents** into the appropriate `raw/<category>/` subfolder.
-5. **Run `/ingest`.** The 3-stage pipeline (triage → extract → link) turns raw documents into structured wiki pages.
-6. **Ask questions.** Just type — no command needed. The agent reads from `wiki/` and cites its sources.
-7. When you're ready to share with the team, follow [`MAINTAINING.md`](MAINTAINING.md) → "Drive setup" and run `/publish`.
-
-> **Using Codex, Cursor, or another agent?** [`AGENTS.md`](AGENTS.md) ships alongside `CLAUDE.md` and points to the same conventions, so agents that auto-load `AGENTS.md` (Codex, Cursor, others) work out of the box. The slash commands (`/setup`, `/ingest`, `/lint`, etc.) are Claude Code-specific — in other agents, point them at the matching workspace `CONTEXT.md` file (e.g., *"follow `.claude/workspaces/ingest/CONTEXT.md` to ingest the file I just dropped in `raw/`"*). The pipelines are the same; only the trigger is different.
 
 ## How to use it
 
@@ -24,9 +14,14 @@ Three modes of use.
 
 ### 1. Ask a question (default)
 
-Just ask. Any AI agent with access to this directory picks up [`CLAUDE.md`](CLAUDE.md), follows it to [`CONTEXT.md`](CONTEXT.md), and routes through the [research workspace](.claude/workspaces/research/CONTEXT.md) — which tells the agent how to find the right pages, cite sources, and respect confidence ratings. No command needed.
+Just ask. Claude Code auto-loads [`CLAUDE.md`](CLAUDE.md); OpenAI Codex (and other agents that follow the `AGENTS.md` convention) auto-load [`AGENTS.md`](AGENTS.md), which forwards to the same instructions. Cursor and any other agent: point it at `CLAUDE.md` manually. From there the agent follows [`CONTEXT.md`](CONTEXT.md) into the [research workspace](.claude/workspaces/research/CONTEXT.md), which tells it how to find the right pages, cite sources, and respect confidence ratings. No command needed.
 
-The agent answers with citations like `(source: [[sources/some-page]])` so you can trace any claim back to its source.
+Example question shapes (fill in your own domain):
+- "How does `<our product>` compare to `<competitor>`?"
+- "What's our positioning on `<market shift or theme>`?"
+- "What's our GTM strategy for `<segment>`?"
+
+The agent answers with citations like `(source: [[sources/<source-slug>]])` so you can trace any claim back to its source.
 
 **Meaningful answers are auto-filed.** When an answer synthesizes 3+ wiki pages and runs >300 words, the agent saves it to [`wiki/analyses/`](wiki/analyses/) automatically and tells you in one line (*"Filed as `analyses/<slug>.md` — delete if not useful."*). This is how the wiki compounds — good answers don't disappear into chat history. Deletion is cheaper than re-asking the same question next month.
 
@@ -39,6 +34,8 @@ Drop the file into the appropriate `raw/` subfolder, then run:
 ```
 
 This runs the 3-stage ingest pipeline (triage → extract → link), creates or updates the relevant entity pages, rebuilds backlinks, and appends a log entry.
+
+> **No slash commands?** `/ingest` and `/lint` are Claude Code shortcuts. On Codex or any other agent, point it at [`.claude/workspaces/ingest/CONTEXT.md`](.claude/workspaces/ingest/CONTEXT.md) and ask it to follow the pipeline — the prose workflow is the same.
 
 ### 3. Maintain the wiki
 
@@ -86,14 +83,16 @@ This turns passive consumers into curators without diluting maintainer control. 
 ## Repo structure
 
 ```
-your-wiki/
-├── CLAUDE.md       Map of the repo. Always loaded by agents.
+<wiki-root>/
+├── CLAUDE.md       Map of the repo. Always loaded by Claude Code.
+├── AGENTS.md       Same map, forwards here. Auto-loaded by Codex and others.
 ├── CONTEXT.md      Task router.
+├── SETUP.md        First-session config (when wiki/domain.md is unconfigured).
 ├── README.md       This file.
 ├── MAINTAINING.md  Operator playbook (ingest, lint, publish, review-contributions).
 │
 ├── raw/            Source documents. Immutable — never edited. Gitignored.
-├── wiki/           Knowledge layer. All entity pages live here.
+├── wiki/           Knowledge layer. All entity pages + domain.md config.
 ├── deliverables/   Maintainer scratchpad — one-off outputs. Gitignored.
 ├── .claude/        Maintainer machinery: workspaces, commands, scripts.
 │
@@ -126,11 +125,12 @@ Full schema in [`.claude/workspaces/ingest/docs/schema.md`](.claude/workspaces/i
 
 ## How agents consume it
 
-Three files cover most queries:
+Four files cover most queries:
 
-1. [`wiki/index.md`](wiki/index.md) — master catalog
-2. [`wiki/overview.md`](wiki/overview.md) — company synthesis
-3. [`wiki/glossary.md`](wiki/glossary.md) — canonical terminology
+1. [`wiki/domain.md`](wiki/domain.md) — org name, scope, active entity types, team-feature config
+2. [`wiki/index.md`](wiki/index.md) — master catalog
+3. [`wiki/overview.md`](wiki/overview.md) — synthesis of the organization
+4. [`wiki/glossary.md`](wiki/glossary.md) — canonical terminology
 
 Each page carries a `confidence:` rating in its frontmatter:
 
@@ -179,12 +179,16 @@ See [`wiki/log.md`](wiki/log.md) for the append-only history of every ingest, li
 
 ## Customizing for your domain
 
-1. **Edit `CLAUDE.md`** — change the "Purpose" section to describe *your* company or domain.
-2. **Rename `raw/` subfolders** to match your document categories.
-3. **Edit `wiki/overview.md`** — write a paragraph or two about your company. The agent updates this as it ingests sources.
-4. **Edit `wiki/glossary.md`** — seed it with terms your domain cares about.
-5. **Add or remove entity types.** If you don't sell software, you may not need `products/` or `features/`. If you're a research team, you may want `papers/` or `experiments/`.
-6. **Set the plugin name.** Search for `team-wiki` in `.claude-plugin/`, `commands/`, `skills/`, and `MAINTAINING.md` if you want a different command prefix.
-7. **Configure Drive** — see [`MAINTAINING.md`](MAINTAINING.md) → "Drive setup" before your first `/publish`.
+The agent-driven path is `/setup` (Claude Code) or just opening the repo in any agent that auto-loads `CLAUDE.md` / `AGENTS.md` — it'll see [`wiki/domain.md`](wiki/domain.md) with `status: unconfigured` and walk you through [`SETUP.md`](SETUP.md). That interview handles all of the below.
+
+If you'd rather customize manually:
+
+1. **Fill in [`wiki/domain.md`](wiki/domain.md)** — set `org`, `domain`, `entity_types_active`, `raw_taxonomy`, `example_queries`. Flip `status: unconfigured` → `status: configured`.
+2. **Replace `<Organization>` placeholders** in `CLAUDE.md`, `CONTEXT.md`, `README.md`, `MAINTAINING.md`.
+3. **Rename `raw/` subfolders** to match your `raw_taxonomy`.
+4. **Drop unused entity-type folders** under `wiki/` for any type you removed from `entity_types_active`. Add new folders for any custom types.
+5. **Seed [`wiki/overview.md`](wiki/overview.md)** with a paragraph or two about your organization. The ingest agent will expand it.
+6. **Set the plugin name** in [`wiki/domain.md`](wiki/domain.md) → `plugin_name` and propagate it. Default is `team-wiki`.
+7. **Configure Drive** when you're ready for team distribution — see [`MAINTAINING.md`](MAINTAINING.md) → "Drive setup (one-time)" and set `team_features_enabled: true` in `wiki/domain.md`.
 
 The harness in `.claude/` and the plugin in `commands/`/`skills/` are domain-agnostic — they work on any corpus.
