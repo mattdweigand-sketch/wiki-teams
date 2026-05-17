@@ -6,16 +6,17 @@ This is the **team edition**: ships as a [Cowork](https://github.com/anthropics/
 
 > Looking for the solo version? See [wiki-solo](https://github.com/mattdweigand-sketch/wiki-solo) — same machinery, no plugin or team-distribution layer.
 
-Drop your documents into `raw/`, run `/ingest`, and the wiki starts compounding.
-
 ## Quick start (maintainer)
 
-1. **Use this template** (the "Use this template" button on GitHub) or fork it into your own workspace.
-2. **Drop source documents** into the appropriate `raw/<category>/` subfolder. Existing subfolders are example categories — rename, add, or remove to fit your domain.
-3. **Open the project in Claude Code** (or another AI coding agent that respects `CLAUDE.md`).
-4. **Run `/ingest`** to turn raw documents into structured wiki pages.
-5. **Ask questions.** The agent reads from `wiki/` and cites its sources.
-6. When you're ready to share with the team, follow [`MAINTAINING.md`](MAINTAINING.md) → "Drive setup" and run `/publish`.
+1. **Use this template** (the "Use this template" button on GitHub) or `git clone` it into your own workspace.
+2. **Open the project in [Claude Code](https://claude.ai/code)** (or another AI coding agent that respects `CLAUDE.md`).
+3. **Run `/setup`.** The agent walks you through first-time customization — names your org, seeds `wiki/overview.md`, decides whether you want the team-plugin features, and confirms you're ready to ingest. Takes ~3 minutes.
+4. **Drop source documents** into the appropriate `raw/<category>/` subfolder.
+5. **Run `/ingest`.** The 3-stage pipeline (triage → extract → link) turns raw documents into structured wiki pages.
+6. **Ask questions.** Just type — no command needed. The agent reads from `wiki/` and cites its sources.
+7. When you're ready to share with the team, follow [`MAINTAINING.md`](MAINTAINING.md) → "Drive setup" and run `/publish`.
+
+> **No Claude Code?** This template is also usable with any AI agent that auto-loads `CLAUDE.md` — the file is the source of truth for repo conventions. Without `/setup`, you'd customize the placeholders manually (see the "Customizing for your domain" section at the bottom of this README), then drop files into `raw/` and ask your agent to follow `.claude/workspaces/ingest/CONTEXT.md` to ingest them.
 
 ## How to use it
 

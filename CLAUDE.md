@@ -12,6 +12,12 @@ This file is the **map** — always loaded. It tells you what's where. It does N
 
 ---
 
+## First-time setup signal (read at session start)
+
+If [`wiki/overview.md`](wiki/overview.md) still contains the placeholder phrase *"Write a paragraph or two about your company here"*, this is a freshly cloned template that has not been customized. **Offer the user `/setup`** in one line: *"This looks like a fresh template. Want me to run `/setup` to customize it for your org? (3 minutes)"* — then wait for a yes before doing anything. If the wiki has been customized, do not mention `/setup` again.
+
+---
+
 ## Auto-File Rule (read before answering any domain question)
 
 After answering any domain question that meets **all three** criteria below, file the answer to `wiki/analyses/<slug>.md` using the [analysis template](.claude/workspaces/research/docs/analysis-template.md). **Don't ask first.** Notify in one line after filing: *"Filed as `analyses/<slug>.md` — delete if not useful."* Then append a `query` entry to [`wiki/log.md`](wiki/log.md) and run `python3 .claude/commands/rebuild_referenced_by.py`.
