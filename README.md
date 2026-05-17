@@ -16,7 +16,7 @@ This is the **team edition**: ships as a [Cowork](https://github.com/anthropics/
 6. **Ask questions.** Just type — no command needed. The agent reads from `wiki/` and cites its sources.
 7. When you're ready to share with the team, follow [`MAINTAINING.md`](MAINTAINING.md) → "Drive setup" and run `/publish`.
 
-> **No Claude Code?** This template is also usable with any AI agent that auto-loads `CLAUDE.md` — the file is the source of truth for repo conventions. Without `/setup`, you'd customize the placeholders manually (see the "Customizing for your domain" section at the bottom of this README), then drop files into `raw/` and ask your agent to follow `.claude/workspaces/ingest/CONTEXT.md` to ingest them.
+> **Using Codex, Cursor, or another agent?** [`AGENTS.md`](AGENTS.md) ships alongside `CLAUDE.md` and points to the same conventions, so agents that auto-load `AGENTS.md` (Codex, Cursor, others) work out of the box. The slash commands (`/setup`, `/ingest`, `/lint`, etc.) are Claude Code-specific — in other agents, point them at the matching workspace `CONTEXT.md` file (e.g., *"follow `.claude/workspaces/ingest/CONTEXT.md` to ingest the file I just dropped in `raw/`"*). The pipelines are the same; only the trigger is different.
 
 ## How to use it
 
