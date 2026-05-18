@@ -11,7 +11,6 @@ from collections import defaultdict
 WIKI_ROOT = Path("wiki")
 META_PAGES = {
     "index", "log", "overview", "glossary", "primer",
-    "sourcing-queue", "contradictions", "design-notes", "SCHEMA",
 }
 META_DIRS = {"style"}
 

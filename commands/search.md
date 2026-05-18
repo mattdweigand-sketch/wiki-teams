@@ -1,5 +1,5 @@
 ---
-description: Ask any question of your team wiki — products, competitors, personas, strategy, domain terminology. Returns a conversational answer drawn from the wiki. Read-only.
+description: Ask any question of your team wiki — products, competitors, personas, strategy, domain terminology. Returns a conversational answer drawn from the wiki. Read-only on the wiki itself; may offer to submit a synthesis answer as a contribution to the maintainer (opt-in only).
 argument-hint: <your question>
 ---
 

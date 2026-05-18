@@ -41,6 +41,7 @@ The `archive/` and `archive/rejected/` subfolders inside contributions are lazy-
 - [ ] `.claude/commands/review-contributions.md` has `<YOUR_CONTRIBUTIONS_FOLDER_ID>` replaced
 - [ ] `skills/search-team-wiki/SKILL.md` has `<YOUR_CONTRIBUTIONS_FOLDER_ID>` replaced
 - [ ] `.claude-plugin/marketplace.json` has `<YOUR_NAME>` and `<YOUR_EMAIL>` replaced
+- [ ] `.claude-plugin/plugin.json` has `<YOUR_NAME>` replaced in `author.name`
 
 Confirm with: `grep -rn "<YOUR_" .` — should return zero hits after setup.
 
@@ -109,6 +110,8 @@ After any meaningful change set, publish so teammates running `/team-wiki:refres
 Or from a terminal: `.claude/scripts/publish.sh`.
 
 The script rebuilds `wiki.zip` from `wiki/`, prints page count + size, and opens the snapshot Drive folder in your browser. **Drag `wiki.zip` into the folder and click "Replace existing file"** when prompted. The file ID stays stable — that's how teammates' `/team-wiki:refresh` keeps working without any plugin update.
+
+> ⚠️ **If you delete + reupload instead of overwriting, the file gets a new ID and every teammate's `/team-wiki:refresh` breaks.** Always overwrite. If it does happen, follow the recovery steps below.
 
 #### Recovering if the file ID changes
 

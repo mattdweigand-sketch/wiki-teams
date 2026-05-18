@@ -24,7 +24,7 @@ fi
 
 echo "→ Building wiki.zip from wiki/ ..."
 rm -f wiki.zip
-( cd wiki && zip -rq ../wiki.zip . -x "*.DS_Store" )
+( cd wiki && zip -rq ../wiki.zip . -x "*.DS_Store" -x "*/.git/*" -x ".git/*" )
 
 PAGE_COUNT=$(find wiki -name "*.md" -type f | wc -l | tr -d ' ')
 SIZE=$(ls -lh wiki.zip | awk '{print $5}')

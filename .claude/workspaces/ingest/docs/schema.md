@@ -26,7 +26,7 @@ Reference spec for entity types, page format, and source-type summary templates.
 
 ## Page Format
 
-Every wiki page must have this YAML frontmatter:
+Every entity page must have this YAML frontmatter (infrastructure pages — `index.md`, `log.md`, `glossary.md`, `overview.md`, `primer.md` — carry only `title` and `type`):
 
 ```yaml
 ---

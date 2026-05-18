@@ -1,3 +1,8 @@
+---
+title: Wiki Index
+type: index
+---
+
 # Wiki Index
 
 Master catalog of every page, grouped by entity type. Regenerated as pages are added — `/ingest` writes here.

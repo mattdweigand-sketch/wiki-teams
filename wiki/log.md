@@ -1,3 +1,8 @@
+---
+title: Wiki Activity Log
+type: log
+---
+
 # Wiki Activity Log
 
 Append-only record of every ingest, lint, decision capture, query auto-file, and merged contribution. Most recent entries last.

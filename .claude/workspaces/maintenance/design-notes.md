@@ -1,6 +1,6 @@
 ---
 title: Design Notes — Divergences from the Karpathy LLM-Wiki Pattern
-type: style
+type: meta
 sources: []
 tags: [meta, design, schema, agent-context-layer]
 confidence: high
@@ -137,8 +137,8 @@ The Karpathy pattern assumes a **single human** reading their own wiki. This wik
 
 ## Related pages
 
-- [[primer]] — cold-start guide for downstream agents
-- [[sourcing-queue]] — what to ingest next
-- [[contradictions]] — open disagreements across sources
-- [[index]] — full catalog
-- [[overview]] — company synthesis
+- `wiki/primer.md` — cold-start guide for downstream agents
+- `.claude/workspaces/maintenance/sourcing-queue.md` — what to ingest next
+- `.claude/workspaces/maintenance/contradictions.md` — open disagreements across sources
+- `wiki/index.md` — full catalog
+- `wiki/overview.md` — company synthesis

@@ -8,6 +8,19 @@ A self-maintaining, LLM-readable knowledge base. Downstream agents (sales, produ
 
 > Looking for the solo version? See [wiki-solo](https://github.com/mattdweigand-sketch/wiki-solo) — same machinery, no plugin or team-distribution layer.
 
+## Solo vs. Team — which should you use?
+
+| | [wiki-solo](https://github.com/mattdweigand-sketch/wiki-solo) | wiki-teams (this repo) |
+|---|---|---|
+| **Who maintains the wiki** | You | You (the maintainer) |
+| **Who reads the wiki** | You | You + your whole team |
+| **Distribution** | Local only | Cowork plugin, synced via Google Drive |
+| **Team search** | — | `/team-wiki:search <question>` |
+| **Snapshot refresh** | — | `/team-wiki:refresh` |
+| **Contribute-back flow** | — | Teammates submit; you review and merge |
+| **Drive setup required** | No | Yes (one-time, ~10 min) |
+| **Right choice if…** | You’re the only consumer | Others need to query your wiki |
+
 ## How to use it
 
 Three modes of use.

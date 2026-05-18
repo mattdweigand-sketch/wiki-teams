@@ -45,7 +45,7 @@ Patterns to check:
 - Decisions ↔ initiatives/products/metrics (each decision links to what it affects)
 - Analyses → entity pages cited (and entity pages → analyses that reference them)
 
-The auto-generated `## Referenced by` section is rebuilt by `python ../../../commands/rebuild_referenced_by.py` — run that as part of every lint cycle to catch these mechanically.
+The auto-generated `## Referenced by` section is rebuilt by `python3 .claude/commands/rebuild_referenced_by.py` — run that as part of every lint cycle to catch these mechanically.
 
 ### 5. Terminology Drift
 The same concept being called by different names across pages.
@@ -55,10 +55,10 @@ Process:
 - Find pages using non-canonical synonyms.
 - Propose normalizing them (or, if a synonym is genuinely the audience-appropriate term in context, note the deprecated mapping in `glossary.md`).
 
-Private-markets terminology is precise — carried interest, waterfall, NAV, capital call, distribution, subscription document all have specific meanings. Don't tolerate paraphrase here.
+Domain terms are often precise and legally, financially, or technically loaded. The glossary is the authority — don't tolerate paraphrase where the canonical term matters.
 
 ### 6. Concepts Mentioned Without Their Own Page
-A page references a concept (e.g., "GP-led secondary," "NAV facility") that lacks a `wiki/concepts/<term>.md` of its own. The reader can't follow the link.
+A page references a concept (e.g., a domain-specific term or proper noun) that lacks a `wiki/concepts/<term>.md` of its own. The reader can't follow the link.
 
 When found: propose creating the concept page. If it would be substantial enough to warrant ingestion of a source, add to [`../sourcing-queue.md`](../sourcing-queue.md) instead.
 
@@ -98,7 +98,7 @@ Group findings by category. Cap at 10–15 top items. Order by impact (contradic
 - …
 
 ### Terminology Drift (2)
-- "subscription doc" vs. "subscription document" — glossary canonical is "subscription document"
+- "<term-shorthand>" vs. "<term-canonical>" — glossary canonical is "<term-canonical>"
 - …
 
 ### Confidence Upgrades (2)
@@ -109,5 +109,5 @@ Group findings by category. Cap at 10–15 top items. Order by impact (contradic
 After approval and application:
 - Update [`../contradictions.md`](../contradictions.md) — opened, closed, status changes.
 - Update [`../sourcing-queue.md`](../sourcing-queue.md) — gaps that closed, new gaps surfaced.
-- Run `python ../../../commands/rebuild_referenced_by.py` from the repo root.
+- Run `python3 .claude/commands/rebuild_referenced_by.py` from the repo root.
 - Log it.
