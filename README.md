@@ -1,4 +1,4 @@
-# <Organization> Wiki — Team Edition
+# <Organization> Wiki - Team Edition
 
 A clonable, agent-readable wiki template — the team edition. The company context layer for AI agents at the organization defined in [`wiki/domain.md`](wiki/domain.md), distributable to teammates as a [Cowork](https://github.com/anthropics/cowork) plugin with opt-in contribute-back review.
 
