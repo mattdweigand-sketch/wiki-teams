@@ -21,7 +21,7 @@ Open an issue using the **Feature request** template. Describe the use case, not
 
 ### Pull requests
 1. Fork the repo, create a branch off `main`.
-2. Make your change. If it touches agent-instruction files (`.claude/`, `CLAUDE.md`, `CONTEXT.md`, workspace `CONTEXT.md`s), test it with at least one agent session.
+2. Make your change. If it touches agent-instruction files (`AGENTS.md`, `CLAUDE.md`, `.claude/`, `CONTEXT.md`, workspace `CONTEXT.md`s), test it with at least one agent session.
 3. Keep PRs focused — one logical change per PR.
 4. Update any cross-referenced docs affected by your change.
 5. Open the PR against `main` with a short description of what changed and why.

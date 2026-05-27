@@ -1,6 +1,6 @@
 # <Organization> Wiki — Task Router
 
-[`CLAUDE.md`](CLAUDE.md) (always loaded) has the folder map and conventions. **This file routes you to the right workspace.** Don't read everything — find your task, go to the workspace, follow its `CONTEXT.md`.
+[`AGENTS.md`](AGENTS.md) is the canonical folder map and convention file. Claude Code reaches it through [`CLAUDE.md`](CLAUDE.md), a thin wrapper. **This file routes you to the right workspace.** Don't read everything — find your task, go to the workspace, follow its `CONTEXT.md`.
 
 ---
 

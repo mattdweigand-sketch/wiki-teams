@@ -67,4 +67,4 @@ If `team_features_enabled: false`, the `<YOUR_*>` placeholders in the four plugi
 
 ## After configuration
 
-The agent updates this file's `status:` to `configured`, replaces `<Organization>` placeholders in the framework files (see [`../SETUP.md`](../SETUP.md) for the exact list), and appends a log entry to [`log.md`](log.md).
+The agent updates this file's `status:` to `configured`, replaces `<Organization>` placeholders in the framework files (see [`../SETUP.md`](../SETUP.md) for the exact list), and appends a log entry to [`log.md`](log.md). If setup rewrites the project operating map, update [`../AGENTS.md`](../AGENTS.md). [`../CLAUDE.md`](../CLAUDE.md) is only a Claude Code wrapper.

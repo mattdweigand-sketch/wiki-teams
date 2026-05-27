@@ -4,7 +4,7 @@ A clonable, agent-readable wiki template — the team edition. The company conte
 
 A self-maintaining, LLM-readable knowledge base. Downstream agents (sales, product, customer success) read from it instead of re-deriving context from raw documents. Built on the [Karpathy LLM-wiki pattern](https://karpathy.ai/zero-to-one/).
 
-> **Just cloned this?** See [`SETUP.md`](SETUP.md) — your AI agent will read it on first session and offer to interview you to configure the wiki for your organization. The interview takes ~3 minutes and works in Claude Code, OpenAI Codex, Cursor, and any agent that loads `CLAUDE.md` or `AGENTS.md`.
+> **Just cloned this?** See [`SETUP.md`](SETUP.md). On first session, an agent that reads [`AGENTS.md`](AGENTS.md) will notice the unconfigured domain file and offer to interview you for ~3 minutes.
 
 > Looking for the solo version? See [wiki-solo](https://github.com/mattdweigand-sketch/wiki-solo) — same machinery, no plugin or team-distribution layer.
 
@@ -25,9 +25,15 @@ A self-maintaining, LLM-readable knowledge base. Downstream agents (sales, produ
 
 Three modes of use.
 
+### Agent startup
+
+[`AGENTS.md`](AGENTS.md) is the canonical project instruction file. OpenAI Codex and other AGENTS-aware tools read it directly. Claude Code reads [`CLAUDE.md`](CLAUDE.md), a thin wrapper that imports `AGENTS.md`.
+
+If your agent does not auto-load either file, point it at `AGENTS.md` first.
+
 ### 1. Ask a question (default)
 
-Just ask. Claude Code auto-loads [`CLAUDE.md`](CLAUDE.md); OpenAI Codex (and other agents that follow the `AGENTS.md` convention) auto-load [`AGENTS.md`](AGENTS.md), which forwards to the same instructions. Cursor and any other agent: point it at `CLAUDE.md` manually. From there the agent follows [`CONTEXT.md`](CONTEXT.md) into the [research workspace](.claude/workspaces/research/CONTEXT.md), which tells it how to find the right pages, cite sources, and respect confidence ratings. No command needed.
+Just ask. The agent follows [`CONTEXT.md`](CONTEXT.md) into the [research workspace](.claude/workspaces/research/CONTEXT.md), which tells it how to find the right pages, cite sources, and respect confidence ratings. No command needed.
 
 Example question shapes (fill in your own domain):
 - "How does `<our product>` compare to `<competitor>`?"
@@ -97,8 +103,8 @@ This turns passive consumers into curators without diluting maintainer control. 
 
 ```
 <wiki-root>/
-├── CLAUDE.md       Map of the repo. Always loaded by Claude Code.
-├── AGENTS.md       Same map, forwards here. Auto-loaded by Codex and others.
+├── AGENTS.md       Canonical project operating map. Read by Codex and other AGENTS-aware tools.
+├── CLAUDE.md       Thin Claude Code wrapper that imports AGENTS.md.
 ├── CONTEXT.md      Task router.
 ├── SETUP.md        First-session config (when wiki/domain.md is unconfigured).
 ├── README.md       This file.
@@ -192,12 +198,12 @@ See [`wiki/log.md`](wiki/log.md) for the append-only history of every ingest, li
 
 ## Customizing for your domain
 
-The agent-driven path is `/setup` (Claude Code) or just opening the repo in any agent that auto-loads `CLAUDE.md` / `AGENTS.md` — it'll see [`wiki/domain.md`](wiki/domain.md) with `status: unconfigured` and walk you through [`SETUP.md`](SETUP.md). That interview handles all of the below.
+The agent-driven path is `/setup` (Claude Code) or just opening the repo in any agent that reads `AGENTS.md` — it'll see [`wiki/domain.md`](wiki/domain.md) with `status: unconfigured` and walk you through [`SETUP.md`](SETUP.md). That interview handles all of the below.
 
 If you'd rather customize manually:
 
 1. **Fill in [`wiki/domain.md`](wiki/domain.md)** — set `org`, `domain`, `entity_types_active`, `raw_taxonomy`, `example_queries`. Flip `status: unconfigured` → `status: configured`.
-2. **Replace `<Organization>` placeholders** in `CLAUDE.md`, `CONTEXT.md`, `README.md`, `MAINTAINING.md`.
+2. **Replace `<Organization>` placeholders** in `AGENTS.md`, `CONTEXT.md`, `README.md`, `MAINTAINING.md`.
 3. **Rename `raw/` subfolders** to match your `raw_taxonomy`.
 4. **Drop unused entity-type folders** under `wiki/` for any type you removed from `entity_types_active`. Add new folders for any custom types.
 5. **Seed [`wiki/overview.md`](wiki/overview.md)** with a paragraph or two about your organization. The ingest agent will expand it.

@@ -8,9 +8,9 @@
 
 At session start, the repo's map file routes you to [`wiki/domain.md`](wiki/domain.md). Which map file depends on your agent:
 
-- **Claude Code** auto-loads [`CLAUDE.md`](CLAUDE.md) — read its "Session Start Checklist."
-- **OpenAI Codex** auto-loads [`AGENTS.md`](AGENTS.md), which forwards to `CLAUDE.md`. Same checklist applies.
-- **Cursor / other agents:** point yourself at `CLAUDE.md` manually; the checklist there is agent-agnostic.
+- **OpenAI Codex and other AGENTS-aware tools** read [`AGENTS.md`](AGENTS.md) directly.
+- **Claude Code** auto-loads [`CLAUDE.md`](CLAUDE.md), a thin wrapper that imports `AGENTS.md`.
+- **Cursor / other agents:** point yourself at `AGENTS.md` manually; the checklist there is agent-agnostic.
 
 In all cases, the checklist tells you to read [`wiki/domain.md`](wiki/domain.md). If that file has `status: unconfigured` in its frontmatter, **do this before answering any other question.** Tell the user:
 
@@ -53,6 +53,8 @@ Ask these in order. Keep it conversational; one question at a time unless the us
 
 In order:
 
+If any setup or finalize step rewrites the project operating map, update [`AGENTS.md`](AGENTS.md). Do not add project instructions to [`CLAUDE.md`](CLAUDE.md); it is only the Claude Code wrapper.
+
 ### 1. Fill `wiki/domain.md`
 
 Replace the placeholder values in the frontmatter with the user's answers. Flip `status: unconfigured` → `status: configured`. Update `updated:` to today's date. If they enabled team features, set `team_features_enabled: true` and fill `plugin_name` plus the three Drive IDs (or leave the `<YOUR_*>` placeholders if they're doing Drive setup later).
@@ -64,7 +66,7 @@ Four files have `<Organization>` placeholders that need the user's org name:
 | File | What to replace |
 |---|---|
 | [`README.md`](README.md) | `<Organization> Wiki — Team Edition` → `<Their Org> Wiki — Team Edition` |
-| [`CLAUDE.md`](CLAUDE.md) | `<Organization> Wiki — Map` → `<Their Org> Wiki — Map` |
+| [`AGENTS.md`](AGENTS.md) | `<Organization> Wiki - Team Edition` → `<Their Org> Wiki - Team Edition` |
 | [`CONTEXT.md`](CONTEXT.md) | `<Organization> Wiki — Task Router` → `<Their Org> Wiki — Task Router` |
 | [`MAINTAINING.md`](MAINTAINING.md) | `Maintaining the <Organization> Wiki` → `Maintaining the <Their Org> Wiki` |
 
@@ -89,7 +91,7 @@ If the user picked a custom plugin name (Part B, question 8):
 - Rename `skills/search-team-wiki/` → `skills/search-<new-name>/`
 - Rename `skills/refresh-team-wiki/` → `skills/refresh-<new-name>/`
 - Inside each renamed skill's `SKILL.md`, update the `name:` frontmatter field
-- Search-and-replace `team-wiki` → `<new-name>` across `commands/search.md`, `commands/refresh.md`, `.claude/commands/publish.md`, `README.md`, `MAINTAINING.md`, `CLAUDE.md`, `.claude/scripts/publish.sh`
+- Search-and-replace `team-wiki` → `<new-name>` across `commands/search.md`, `commands/refresh.md`, `.claude/commands/publish.md`, `README.md`, `MAINTAINING.md`, `AGENTS.md`, `.claude/scripts/publish.sh`
 
 If the user has Drive IDs ready (Part B, question 9), replace `<YOUR_SNAPSHOT_FOLDER_ID>`, `<YOUR_SNAPSHOT_FILE_ID>`, `<YOUR_CONTRIBUTIONS_FOLDER_ID>` placeholders across:
 

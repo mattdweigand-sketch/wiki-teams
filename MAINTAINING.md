@@ -1,6 +1,6 @@
 # Maintaining the <Organization> Wiki
 
-For the maintainer(s) of the wiki. [`README.md`](README.md) is for consumers, [`CLAUDE.md`](CLAUDE.md) is the architecture map — this is the operator's manual for keeping the wiki healthy and distributing it to the team.
+For the maintainer(s) of the wiki. [`README.md`](README.md) is for consumers, [`AGENTS.md`](AGENTS.md) is the canonical architecture map, and [`CLAUDE.md`](CLAUDE.md) is only a Claude Code wrapper. This is the operator's manual for keeping the wiki healthy and distributing it to the team.
 
 ---
 
@@ -150,7 +150,7 @@ For these, describe the task in chat — the agent routes through the maintenanc
 
 ## Pointers
 
-- **Architecture & conventions** → [`CLAUDE.md`](CLAUDE.md) (folder map, hard rules, naming, citation rules)
+- **Architecture & conventions** → [`AGENTS.md`](AGENTS.md) (folder map, hard rules, naming, citation rules)
 - **Task router** → [`CONTEXT.md`](CONTEXT.md) (which workspace for which task)
 - **For consumers** → [`README.md`](README.md) (what the plugin does, how teammates use it)
 - **Activity log** → [`wiki/log.md`](wiki/log.md) (append-only history of every ingest, lint, decision, merged contribution)
